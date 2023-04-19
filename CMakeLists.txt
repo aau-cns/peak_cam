@@ -29,8 +29,10 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 find_package(Boost REQUIRED COMPONENTS system)
-find_package(ids_peak REQUIRED)  # get CMake macro for IDS_PEAK_INCLUDE_DIR and IDS_PEAK_LIBRARIES
-find_package(ids_peak_ipl REQUIRED)  # get CMake macro for IDS_PEAK_IPL_INCLUDE_DIR and IDS_PEAK_IPL_LIBRARIES
+find_package(ids_peak REQUIRED PATHS /opt/ids-peak-ueyetl)  # get CMake macro for ids_peak_INCLUDES and ids_peak_LIBS
+find_package(ids_peak_ipl REQUIRED PATHS /opt/ids-peak-ueyetl)  # get CMake macro for ids_peak_ipl_INLCUDES and ids_peak_ipl_LIBS
+# according to https://cmake.org/cmake/help/v3.0/command/find_package.html
+#   PATHS only adds options to search additionally, should not overwrite default
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -142,8 +144,8 @@ include_directories(
   src
   include
   ${catkin_INCLUDE_DIRS}
-  ${IDS_PEAK_INCLUDE_DIR}
-  ${IDS_PEAK_IPL_INCLUDE_DIR}
+  ${ids_peak_INCLUDES}
+  ${ids_peak_ipl_INCLUDES}
 )
 
 
@@ -156,7 +158,8 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node src/peak_cam_node.cpp
-  src/peak_cam.cpp 
+  src/peak_cam.cpp
+  src/autofeaturesmanager.cpp 
 )
 
 ## Rename C++ executable without prefix
@@ -171,8 +174,8 @@ add_executable(${PROJECT_NAME}_node src/peak_cam_node.cpp
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
-  ${IDS_PEAK_LIBRARIES}
-  ${IDS_PEAK_IPL_LIBRARIES}
+  ${_ids_peak_sharedlib_file}
+  ${_ids_peak_ipl_sharedlib_file}
 )
 
 #############
