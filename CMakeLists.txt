@@ -34,6 +34,15 @@ find_package(ids_peak_ipl REQUIRED PATHS /opt/ids-peak-ueyetl)  # get CMake macr
 # according to https://cmake.org/cmake/help/v3.0/command/find_package.html
 #   PATHS only adds options to search additionally, should not overwrite default
 
+
+find_package(OpenCV 4 REQUIRED)
+
+# display message to user
+message(STATUS "EIGEN VERSION: " ${EIGEN3_VERSION})
+message(STATUS "OPENCV VERSION: " ${OpenCV_VERSION})
+message(STATUS "BOOST VERSION: " ${Boost_VERSION})
+
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -176,6 +185,7 @@ target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
   ${_ids_peak_sharedlib_file}
   ${_ids_peak_ipl_sharedlib_file}
+  ${OpenCV_LIBRARIES}
 )
 
 #############
