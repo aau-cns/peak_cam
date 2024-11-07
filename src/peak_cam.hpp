@@ -64,6 +64,9 @@
 #include <peak/converters/peak_buffer_converter_ipl.hpp>
 #include <peak/peak.hpp>
 
+//AutoFeaturesManager
+#include "autofeaturesmanager.h"
+
 //Parameters
 #include "acquisition_parameters.hpp"
 
@@ -85,7 +88,7 @@ public:
     // acquisitionLoop function and bool are public to run on particular thread
     void acquisitionLoop();
     
-    // Preventing two threads to acces variable acquisitionLoop_running
+    // Preventing two threads to access variable acquisitionLoop_running
     std::atomic<bool> acquisitionLoop_running{false};
 
 private:
@@ -116,7 +119,17 @@ private:
     std::shared_ptr<peak::core::Device> m_device;
     std::shared_ptr<peak::core::NodeMap> m_nodeMapRemoteDevice;
     peak::ipl::PixelFormatName pixel_format_name;
+    peak::ipl::ImageTransformer m_imageTransformerIPL;
     sensor_msgs::Image image_for_encoding;
+
+    // Manager for executing Auto features (Gain/Exposure/WhiteBalance)
+    peak::ipl::Gain m_gainControllerIPL;
+    peak::ipl::GammaCorrector m_gammaControllerIPL;
+    AutoFeaturesManager m_autoFeaturesManager;
+    bool m_gainAutoSupported {false};
+    bool m_balanceWhiteAutoSupported {false};
+    bool m_hostColorGainsEnabled {false};
+    bool m_exposureAutoSupported {false};
 
     // Camera Parameters
     Peak_Params peak_params;
