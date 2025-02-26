@@ -92,112 +92,112 @@ PeakCamNode::~PeakCamNode()
 void PeakCamNode::getParams()
 {
   try {
-    m_frameId = declare_parameter("frame_id").get<std::string>();
+    m_frameId = declare_parameter<std::string>("frame_id");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The frame_id provided was invalid");
     throw ex;
   }
   
   try {
-    m_imageTopic = declare_parameter("image_topic").get<std::string>();
+    m_imageTopic = declare_parameter<std::string>("image_topic");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The image_topic provided was invalid");
     throw ex;
   }
 
   try {
-    m_cameraInfoUrl = declare_parameter("camera_info_url").get<std::string>();
+    m_cameraInfoUrl = declare_parameter<std::string>("camera_info_url");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The camera_info_url provided was invalid");
     throw ex;
   }
 
   try {
-    m_peakParams.ExposureTime = declare_parameter("ExposureTime").get<int>();
+    m_peakParams.ExposureTime = declare_parameter<int>("ExposureTime");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The ExposureTime provided was invalid");
     throw ex;
   }
   
   try {
-    m_peakParams.AcquisitionFrameRate = declare_parameter("AcquisitionFrameRate").get<int>();
+    m_peakParams.AcquisitionFrameRate = declare_parameter<int>("AcquisitionFrameRate");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The AcquisitionFrameRate provided was invalid");
     throw ex;
   }
   
   try {
-    m_peakParams.ImageHeight = declare_parameter("ImageHeight").get<int>();
+    m_peakParams.ImageHeight = declare_parameter<int>("ImageHeight");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The ImageHeight provided was invalid");
     throw ex;
   }
   
   try {
-    m_peakParams.ImageWidth = declare_parameter("ImageWidth").get<int>();
+    m_peakParams.ImageWidth = declare_parameter<int>("ImageWidth");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The ImageWidth provided was invalid");
     throw ex;
   }
   
   try {
-    m_peakParams.UseOffset = declare_parameter("UseOffset").get<bool>();
+    m_peakParams.UseOffset = declare_parameter<bool>("UseOffset");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The UseOffset provided was invalid");
     throw ex;
   }
   
   try {
-    m_peakParams.OffsetHeight = declare_parameter("OffsetHeight").get<int>();
+    m_peakParams.OffsetHeight = declare_parameter<int>("OffsetHeight");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The OffsetHeight provided was invalid");
     throw ex;
   }
   
   try {
-    m_peakParams.OffsetWidth = declare_parameter("OffsetWidth").get<int>();
+    m_peakParams.OffsetWidth = declare_parameter<int>("OffsetWidth");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The OffsetWidth provided was invalid");
     throw ex;
   }
   
   try {
-    m_peakParams.Gamma = declare_parameter("Gamma").get<double>();
+    m_peakParams.Gamma = declare_parameter<double>("Gamma");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The Gamma provided was invalid");
     throw ex;
   }
 
   try {
-    m_peakParams.selectedDevice = declare_parameter("selectedDevice").get<std::string>();
+    m_peakParams.selectedDevice = declare_parameter<std::string>("selectedDevice");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The selectedDevice provided was invalid");
     throw ex;
   }
 
   try {
-    m_peakParams.ExposureAuto = declare_parameter("ExposureAuto").get<std::string>();
+    m_peakParams.ExposureAuto = declare_parameter<std::string>("ExposureAuto");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The ExposureAuto provided was invalid");
     throw ex;
   }
 
   try {
-    m_peakParams.GainAuto = declare_parameter("GainAuto").get<std::string>();
+    m_peakParams.GainAuto = declare_parameter<std::string>("GainAuto");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The GainAuto provided was invalid");
     throw ex;
   }
   
   try {
-    m_peakParams.PixelFormat = declare_parameter("PixelFormat").get<std::string>();
+    m_peakParams.PixelFormat = declare_parameter<std::string>("PixelFormat");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The PixelFormat provided was invalid");
     throw ex;
   }
   
   try {
-    m_peakParams.GainSelector = declare_parameter("GainSelector").get<std::string>();
+    m_peakParams.GainSelector = declare_parameter<std::string>("GainSelector");
   } catch (rclcpp::ParameterTypeException & ex) {
     RCLCPP_ERROR(get_logger(), "The GainSelector provided was invalid");
     throw ex;
@@ -209,7 +209,7 @@ void PeakCamNode::getParams()
   RCLCPP_INFO(this->get_logger(), "  camera_info_url: %s", m_cameraInfoUrl.c_str());
   RCLCPP_INFO(this->get_logger(), "  ExposureTime: %i", m_peakParams.ExposureTime);
   RCLCPP_INFO(this->get_logger(), "  AcquisitionFrameRate: %i", m_peakParams.AcquisitionFrameRate);
-  RCLCPP_INFO(this->get_logger(), "  Gamma: %d", m_peakParams.Gamma);
+  RCLCPP_INFO(this->get_logger(), "  Gamma: %f", m_peakParams.Gamma);
   RCLCPP_INFO(this->get_logger(), "  ImageHeight: %i", m_peakParams.ImageHeight);
   RCLCPP_INFO(this->get_logger(), "  ImageWidth: %i", m_peakParams.ImageWidth);
   RCLCPP_INFO(this->get_logger(), "  OffsetHeight: %i", m_peakParams.OffsetHeight);
@@ -234,7 +234,7 @@ void PeakCamNode::openDevice()
     {
       // update the device manager
       deviceManager.Update();
-     
+
       // exit program if no device was found
       if (deviceManager.Devices().empty())
       {
@@ -448,7 +448,6 @@ void PeakCamNode::acquisitionLoop()
       m_cameraInfo.reset(new sensor_msgs::msg::CameraInfo(ci));
       m_cameraInfo->header = *m_header;
 
-      const auto imageBufferSize = m_peakParams.ImageWidth * m_peakParams.ImageHeight * m_bytesPerPixel;
       // buffer processing start
       auto image = peak::BufferTo<peak::ipl::Image>(buffer).ConvertTo(m_pixelFormat);
       cv::Mat cvImage;
