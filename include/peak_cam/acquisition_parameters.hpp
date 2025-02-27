@@ -33,12 +33,12 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 // POSSIBILITY OF SUCH DAMAGE. 
-
-
+#ifndef PEAK_CAM__ACQUISITION_PARAMETERS_HPP_
+#define PEAK_CAM__ACQUISITION_PARAMETERS_HPP_
 
 #include <peak_ipl/peak_ipl.hpp>
-#include <sensor_msgs/image_encodings.h>
-#include <sensor_msgs/Image.h>
+#include "sensor_msgs/image_encodings.hpp"
+#include "sensor_msgs/msg/image.hpp"
 
 
 namespace peak_cam
@@ -46,21 +46,21 @@ namespace peak_cam
 
 struct Peak_Params
 {
-    std::string selectedDevice{"000000"}; // default to all 0's
-    int ExposureTime{100};
-    std::string TriggerSource{"Off"};
-    std::string TriggerActivation{"RisingEdge"};
-    int TriggerDivider{1};
-    std::string Line1Source{"Off"};
-    double AcquisitionFrameRate{1.0};
-    int ImageHeight{480};
-    int ImageWidth{640};
-    double Gamma{1.2};
-    std::string ExposureAuto{"Off"};
-    std::string GainAuto{"Off"};
-    std::string GainSelector;
-    std::string PixelFormat;
-    int DeviceLinkThroughputLimit{125000000};
+  std::string selectedDevice{"000000"}; // default to all 0's
+  int ExposureTime{100};
+  int AcquisitionFrameRate{1};
+  int ImageHeight{480};
+  int ImageWidth{640};
+  bool UseOffset{false};
+  int OffsetWidth{0};
+  int OffsetHeight{0};
+  double Gamma{1.2};
+  std::string ExposureAuto{"Off"};
+  std::string GainAuto{"Off"};
+  std::string GainSelector;
+  std::string PixelFormat{"RGB8"};
+  std::string TriggerMode{"Off"};
+  int TriggerSource{0};
 };
-
 }
+#endif  // PEAK_CAM__ACQUISITION_PARAMETERS_HPP_
